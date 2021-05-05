@@ -1,0 +1,1 @@
+<?phpclass IndexController extends Zend_Controller_Action {    public function indexAction() {        $login = new Zend_Session_Namespace("login");        if (!$login->id) {            $this->_forward('login', 'minha-conta', 'default');        } else {            $this->_forward('index', 'minha-conta', 'default');        }    }}

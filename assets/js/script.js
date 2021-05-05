@@ -1,0 +1,1 @@
+$(function() {    // $(".fancybox").fancybox();    $.getScript('/assets/js/jquery.mask.min.js', function() {        $('.preco').mask('##.##', {reverse: true, placeholder: "0.000"});    });    $('.toltip').tooltipster({        theme: 'tooltipster-light'    });});

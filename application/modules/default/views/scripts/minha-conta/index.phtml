@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+    .ui-state-active{
+        border: 1px solid #0e7fd6;
+        background: #0e80d6;
+        font-weight: normal;
+        color: #ffffff;
+    }
+</style>
+<?
+$this->headScript()->appendFile($this->BaseUrl('assets/area-cliente/js/negociar.js'));
+?>
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section class="page container">
+            <div class="row">
+                <div class="span16">
+                    <div class="row">
+                        <div class="span16">
+                            <div class="box pattern pattern-sandstone">
+                                <div class="box-header">
+                                    <i class="icon-table"></i>
+                                    <h5>
+                                        Comercialização de Suínos
+                                    </h5>
+                                </div>
+                                <div class="box-content box-table">
+                                    <div id="accordion">
+                                        <?
+                                        if ($this->tipos) {
+                                            foreach ($this->tipos as $tipo) {
+                                                ?>
+                                                <h3> <strong><?= $tipo['nome']; ?></strong></h3>
+                                                <div>
+                                                    <div class="box-content box-table">
+                                                        <table width="121" class="table table-hover table-bordered tablesorter" id="sample-table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Produto</th>
+                                                                    <th class="td-actions"> Ações</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?
+                                                                if ($tipo['produtos']) {
+                                                                    foreach ($tipo['produtos'] as $row) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?= ucfirst($row['nome']); ?></td>
+                                                                            <td class="td-actions">
+                                                                                <a href="#" class="btn btn-small btn-info toltip comprar" data-produto="<?= $row['id']; ?>" title="Clique para Comprar">
+                                                                                    <i class="btn-icon-only icon-circle-arrow-down"style="color: #FFF;" > Comprar</i>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <?
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            <? }
+                                        }
+                                        ?>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div id="Modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title titulo">Modal Header</h4>
+                </div>
+                <div class="modal-body conteudo">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger rejeita" param="" data-dismiss="modal">Não Aceito</button>
+                    <button type="button" class="btn btn-success aceitar" param="" data-dismiss="modal">Li e aceito o termo de compra</button>
+                </div>
+            </div>
+
+        </div>
+    </div>

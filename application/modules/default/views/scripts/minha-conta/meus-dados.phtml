@@ -1,0 +1,112 @@
+<?
+$this->headScript()->appendFile($this->BaseUrl('assets/js/valida_cpf_cnpj.js'));
+$this->headScript()->appendFile($this->BaseUrl('assets/js/cadastro.js'));
+$this->headScript()->appendFile($this->BaseUrl('assets/js/meus-dados.js'));
+?>
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section id="my-account-security-form" class="page container">
+            <form id="userSecurityForm" class="form-horizontal" action="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'meus-dados'), null, true); ?>" method="post">
+                <div class="container">
+                    <?
+                    if ($this->dados['tipo_pessoa'] == 1) {
+                        $label_nome = 'Nome';
+                        $placeholder_nome = 'Insira seu Nome';
+                        $label_sobrenome = 'Sobrenome';
+                        $placeholder_sobrenome = 'Insira seu Sobrenome';
+                        $label_doc1 = 'CPF';
+                        $placeholder_doc1 = 'Insira seu CPF';
+                        $label_doc2 = 'RG';
+                        $placeholder_doc2 = 'Insira seu RG';
+                    } else {
+                        $label_nome = 'Razão Social';
+                        $placeholder_nome = 'Insira a Razão Social';
+                        $label_sobrenome = 'Nome Fantasia';
+                        $placeholder_sobrenome = 'Insira o Nome Fantasia';
+                        $label_doc1 = 'CNPJ';
+                        $placeholder_doc1 = 'Insira o CNPJ';
+                        $label_doc2 = 'I.E';
+                        $placeholder_doc2 = 'Insira a Inscrição Estadual';
+                    }
+                    ?>
+                    <div class="row">
+                        <fieldset>
+                            <legend>Meus dados</legend><br>
+                            <div class="span6">
+
+                                <div class="control-group">
+                                    <label class="control-label"><?= $label_nome; ?>:</label>
+                                    <div class="controls">
+                                        <input name="id" id="id" value="<?= $this->dados['id']; ?>" type="hidden">
+                                        <input name="nome1" id="noem1" placeholder="<?= $placeholder_nome; ?>" required="required" value="<?= $this->dados['nome1']; ?>" class="span4"  type="text">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label"><?= $label_sobrenome ?>:</label>
+                                    <div class="controls">
+                                        <input name="nome2" id="nome2" placeholder="<?= $placeholder_sobrenome; ?>" required="required" value="<?= $this->dados['nome2']; ?>" class="span4"  type="text">
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label class="control-label"><?= $label_nome; ?>:</label>
+                                    <div class="controls">
+                                        <input name="nome1" id="noem1" placeholder="<?= $placeholder_nome; ?>" required="required" value="<?= $this->dados['nome1']; ?>" class="span4"  type="text">
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label class="control-label"><?= $label_doc1; ?>:</label>
+                                    <div class="controls">
+                                        <input name="doc1" id="doc1" placeholder="<?= $placeholder_doc1; ?>" class="span4 cpfOuCnpj" required="required" value="<?= $this->dados['doc1']; ?>" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="control-group ">
+                                    <label class="control-label"><?= $label_doc2; ?>:</label>
+                                    <div class="controls">
+                                        <input name="doc2" id="doc2" placeholder="<?= $placeholder_doc2; ?>" class="span4" required="required" value="<?= $this->dados['doc2']; ?>" type="text">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div  class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">Telefone:</label>
+                                    <div class="controls">
+                                        <input name="telefone" id="telefone" placeholder="Insira seu telefone" value="<?= $this->dados['telefone']; ?>" class="span4" required="required" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="control-group ">
+                                    <label class="control-label">E-mail:</label>
+                                    <div class="controls">
+                                        <input name="email" placeholder="Insira seu email" value="<?= $this->dados['email']; ?>" class="span4"  type="email">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Senha:</label>
+                                    <div class="controls">
+                                        <input name="senha"  id="senha"  placeholder="********" class="span4"  type="password">
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label class="control-label">Confirmação:</label>
+                                    <div class="controls">
+                                        <input name="confirma_senha" id="confirma_senha"  placeholder="********" class="span4"  type="password">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <footer id="submit-actions" class="form-actions">
+                        <button type="button" class="btn btn-lg btn-primary toltip editar" title="Editar Dados">Editar</button>
+                        <button id="submit-button" disabled type="submit" class="btn btn-success toltip salvar" title="Salvar Dados" name="action">Salvar</button>
+                        <a href="javascript:history.back()">
+                            <button type="button" class="btn toltip" name="action" value="CANCEL" title="Voltar para a pagina anterior" >Cancelar</button>
+                        </a>
+                    </footer>
+                </div>
+            </form>
+        </section>
+    </div>

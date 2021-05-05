@@ -1,0 +1,73 @@
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section class="page container">
+
+            <div class="row">
+                <div class="span16">
+                    <div class="row">
+
+                        <div class="span16">
+                            <div class="box pattern pattern-sandstone">
+                                <div class="box-header">
+                                    <i class="icon-table"></i>
+                                    <h5>
+                                        Meus Endereços
+                                    </h5>
+                                </div>
+                                <div class="box-content box-table">
+                                    <table id="sample-table" class="table table-hover table-bordered tablesorter">
+                                        <thead>
+                                            <tr>
+                                                <th>Endereço</th>
+                                                <th>Bairro</th>
+                                                <th>Numero</th>
+                                                <th>Cidade</th>
+                                                <th>Estado</th>
+                                                <th>Cep</th>
+                                                <th class="td-actions"> Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?
+                                            if ($this->enderecos) {
+                                                foreach ($this->enderecos as $row) {
+                                                    ?>
+
+                                                    <tr>
+                                                        <td><?= $row['rua']; ?></td>
+                                                        <td><?= $row['bairro']; ?></td>
+                                                        <td><?= $row['numero']; ?></td>
+                                                        <td><?= $row['cidade']; ?></td>
+                                                        <td><?= $row['estado']; ?></td>
+                                                        <td><?= $row['cep']; ?></td>
+
+                                                        <td class="td-actions">
+                                                            <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'edita-endereco', 'endereco' => $row['id']), null, true); ?>" class="btn btn-small btn-info toltip" title="Editar endereço">
+                                                                <i class="btn-icon-only icon-edit"> Editar</i>
+                                                            </a>
+                                                            <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'excluir-endereco', 'endereco' => $row['id']), null, true); ?>" class="btn btn-small btn-info toltip" title="Excluir Endereço">
+                                                                <i class="btn-icon-only icon-remove"> Excluir</i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <?
+                                                }
+                                            } else {
+                                                ?>
+                                            <p></p>
+                                            <p></p>
+                                            <div class="alert alert-info"><strong>Não</strong> há Registros!</div>
+                                        <? } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </div>

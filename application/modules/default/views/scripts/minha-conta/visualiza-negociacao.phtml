@@ -1,0 +1,390 @@
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section class="page container">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <p>
+                            <a href="javascript:history.back()" class="toltip" title="Voltar para pagina anterior">
+                                <button type="button" class="btn btn-lg btn-warning" name="action" value="CANCEL">Voltar</button>
+                            </a></p>
+                    </div>
+                    <div class="panel-primary">
+                        <div id="accordion">
+                            <?
+                            $row = $this->dados;
+                            $numItens = count($row);
+                            for ($i = 0; $i < $numItens; $i++) {
+                                ?>
+                                <div class="span16">
+                                    <div id="Person-1" class="box">
+                                        <div class="box-header">
+                                            <i class="icon-user icon-large"></i>
+                                            <h5>Dados da proposta do dia: <?= $this->ConvercaoDate('-', $row[$i]['data_proposta'], 4); ?> Enviado pelo <?= $row[$i]['enviada_por']; ?></h5>
+                                        </div>
+                                        <div class="box-content box-table">
+                                            <table class="table table-hover tablesorter">
+                                                <tbody>
+                                                    <?
+                                                    if (!empty($row[$i]['negociacao']) && $row[$i]['negociacao'] !== '0') {
+                                                        $param = $row[$i]['negociacao'];
+                                                    } else {
+                                                        $param = $row[$i]['id'];
+                                                    }
+                                                    ?>
+                                                    <? if ($row[$i]['status'] == '2' && $i == 0) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'aprovar-negociacao', 'negociacao' => $param), null, true); ?>" class="btn btn-small btn-info toltip" title="Aprovar Proposta">
+                                                                    <i class="btn-icon-only icon-check"> Aprovar</i>
+                                                                </a>
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                    <? } ?>
+                                                    <tr>
+                                                        <td ><strong>Produto:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['nome_item'])) {
+                                                            if ($row[0]['nome_item'] == $row[$i]['nome_item']) {
+                                                                $check_produto = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_produto = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['nome_item'])) {
+                                                                if ($row[0]['nome_item'] == $row[1]['nome_item']) {
+                                                                    $check_produto = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_produto = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['nome_item']; ?>  <?= $check_produto; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="173" ><strong>Tipo:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['nome_categoria'])) {
+                                                            if ($row[0]['nome_categoria'] == $row[$i]['nome_categoria']) {
+                                                                $check_tipo = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_tipo = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['nome_categoria'])) {
+                                                                if ($row[0]['nome_categoria'] == $row[1]['nome_categoria']) {
+                                                                    $check_tipo = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_tipo = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td width="179"><?= $row[$i]['nome_categoria']; ?>  <?= $check_tipo; ?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Quantidade: </strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['quantidade'])) {
+                                                            if ($row[0]['quantidade'] == $row[$i]['quantidade']) {
+                                                                $check_quantidade = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_quantidade = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['quantidade'])) {
+                                                                if ($row[0]['quantidade'] == $row[1]['quantidade']) {
+                                                                    $check_quantidade = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_quantidade = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['quantidade']; ?> Cabeças <?= $check_quantidade; ?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Preço K.G: </strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['preco'])) {
+                                                            if ($row[0]['preco'] == $row[$i]['preco']) {
+                                                                $check_preco = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_preco = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['preco'])) {
+                                                                if ($row[0]['preco'] == $row[1]['preco']) {
+                                                                    $check_preco = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_preco = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+
+                                                        <td>R$ <?= number_format($row[$i]['preco'], 2, ',', '.'); ?>  <?= $check_preco; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Condição Pagamento:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['idcondicao_pagamento'])) {
+                                                            if ($row[0]['idcondicao_pagamento'] == $row[$i]['idcondicao_pagamento']) {
+                                                                $check_condicao = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_condicao = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[1]['idcondicao_pagamento'])) {
+                                                                if ($row[0]['idcondicao_pagamento'] == $row[1]['idcondicao_pagamento']) {
+                                                                    $check_condicao = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_condicao = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['condicao_pagamento']; ?>  <?= $check_condicao; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Forma Pagamento:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['idforma_pagamento'])) {
+                                                            if ($row[0]['idforma_pagamento'] == $row[$i]['idforma_pagamento']) {
+                                                                $check_forma = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_forma = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['idforma_pagamento'])) {
+                                                                if ($row[0]['idforma_pagamento'] == $row[1]['idforma_pagamento']) {
+                                                                    $check_forma = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_forma = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['forma_pagamento']; ?>  <?= $check_forma; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Descrição Pagamento:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['descricao_pagamento'])) {
+                                                            if ($row[0]['descricao_pagamento'] == $row[$i]['descricao_pagamento']) {
+                                                                $check_desc_pag = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_desc_pag = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['descricao_pagamento'])) {
+                                                                if ($row[0]['descricao_pagamento'] == $row[1]['descricao_pagamento']) {
+                                                                    $check_desc_pag = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_desc_pag = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['descricao_pagamento']; ?>  <?= $check_desc_pag; ?></td>
+                                                    </tr>
+                                                    <? if (!empty($row[$i]['faturamento']) && $row[$i]['faturamento'] > '0') { ?>
+                                                        <tr>
+                                                            <td><strong>Razão Social:</strong></td>
+                                                            <td><?= $row[$i]['nome_faturamento']; ?></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><strong>CPF/CNPJ:</strong></td>
+                                                            <td><?= $row[$i]['cpf_cnpj']; ?></td>
+                                                        </tr>
+                                                    <? } ?>
+
+                                                    <tr>
+                                                        <td><strong>Tributação:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['tributacao'])) {
+                                                            if ($row[0]['tributacao'] == $row[$i]['tributacao']) {
+                                                                $check_tributacao = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_tributacao = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['tributacao'])) {
+                                                                if ($row[0]['tributacao'] == $row[1]['tributacao']) {
+                                                                    $check_tributacao = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_tributacao = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['tributacao']; ?>  <?= $check_tributacao; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Descrição Tributaria:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['descricao_tributaria'])) {
+                                                            if ($row[0]['descricao_tributaria'] == $row[$i]['descricao_tributaria']) {
+                                                                $check_descricao_tributaria = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_descricao_tributaria = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['descricao_tributaria'])) {
+                                                                if ($row[0]['descricao_tributaria'] == $row[1]['descricao_tributaria']) {
+                                                                    $check_descricao_tributaria = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_descricao_tributaria = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['descricao_tributaria']; ?>  <?= $check_descricao_tributaria; ?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Data Entrega:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['data_entrega'])) {
+                                                            if ($row[0]['data_entrega'] == $row[$i]['data_entrega']) {
+                                                                $check_data = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_data = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['data_entrega'])) {
+                                                                if ($row[0]['data_entrega'] == $row[1]['data_entrega']) {
+                                                                    $check_data = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_data = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $this->ConvercaoDate('-', $row[$i]['data_entrega'], 2); ?>  <?= $check_data; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Horário Inicial Recebimento:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['hora_inicial'])) {
+                                                            if ($row[0]['hora_inicial'] == $row[$i]['hora_inicial']) {
+                                                                $check_hora_inicial = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_hora_inicial = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['hora_inicial'])) {
+                                                                if ($row[0]['hora_inicial'] == $row[1]['hora_inicial']) {
+                                                                    $check_hora_inicial = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_hora_inicial = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['hora_inicial']; ?>  <?= $check_hora_inicial; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Horário Final Recebimento:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['hora_final'])) {
+                                                            if ($row[0]['hora_final'] == $row[$i]['hora_final']) {
+                                                                $check_hora_final = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_hora_final = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['hora_final'])) {
+                                                                if ($row[0]['hora_final'] == $row[1]['hora_final']) {
+                                                                    $check_hora_final = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_hora_final = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['hora_final']; ?> <?= $check_hora_final; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Endereço Entrega:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['endereco'])) {
+                                                            if ($row[0]['endereco'] == $row[$i]['endereco']) {
+                                                                $check_endereco = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_endereco = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['endereco'])) {
+                                                                if ($row[0]['endereco'] == $row[1]['endereco']) {
+                                                                    $check_endereco = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_endereco = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['rua']; ?> - <?= $row[$i]['numero']; ?> - <?= $row[$i]['bairro']; ?> - <?= $row[$i]['cidade']; ?> - <?= $row[$i]['estado']; ?>  <?= $check_endereco; ?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Comentario:</strong></td>
+                                                        <?
+                                                        if ($i > 0 && !empty($row[$i]['comentario'])) {
+                                                            if ($row[0]['comentario'] == $row[$i]['comentario']) {
+                                                                $check_comentario = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                            } else {
+                                                                $check_comentario = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                            }
+                                                        } else {
+                                                            if ($numItens > 1 && !empty($row[$i]['comentario'])) {
+                                                                if ($row[0]['comentario'] == $row[1]['comentario']) {
+                                                                    $check_comentario = '<i class="btn-icon-only icon-check"  style="color:green;"></i>';
+                                                                } else {
+                                                                    $check_comentario = '<i class="btn-icon-only icon-remove"  style="color:red;"></i>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <td><?= $row[$i]['comentario']; ?>  <?= $check_comentario; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Vendedor:</strong></td>
+                                                        <td><?= $row[$i]['nome_vendedor']; ?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <? if ($row[$i]["enviada_por"] == 'Cliente' && $row[$i]["status"] != '3') { ?>
+                                                                <a href="#" class="list-group-item"><strong></strong> </a>
+                                                                <a href="<?= $this->url(array('controller' => 'minha-conta', 'action' => 'remover-proposta', 'id' => $row[$i]['id']), null, FALSE); ?>" class="list-group-item">
+                                                                    <button type="button" class="btn btn-danger toltip" title="Remover Proposta Ofertada">Remover</button>
+                                                                </a>
+                                                            <? } ?>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            <? } ?>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:history.back()" class="toltip" title="Voltar para pagina anterior">
+                    <button type="button" class="btn btn-lg btn-warning">Voltar</button>
+                </a>
+
+
+
+                <p>&nbsp;</p>
+            </div>
+    </div>

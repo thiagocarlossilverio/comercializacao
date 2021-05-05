@@ -1,0 +1,40 @@
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section id="my-account-security-form" class="page container">
+            <form id="userSecurityForm" class="form-horizontal" action="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'adicionar-endereco'), null, true); ?>" method="post">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="alert alert-warning">
+                                    <strong>Cargas do Dia: <?php
+                                        $date = new Zend_Date($this->data);
+                                        echo ucfirst($date->get("EEEE, dd 'de' MMMM 'de' yyyy"));
+                                        ?>.
+                                </div>
+                                <div class="panel-body">
+                                    <?php
+                                    echo $this->calendar($this->data, array(
+                                        'showPrevMonthLink' => true, // Faz com que o link para o mês passado seja exibido
+                                        'showNextMonthLink' => true, // Faz com que o link para o mês seguinte seja exibido
+                                        'showOtherMonthDays' => true, // Faz com que os dias de outros meses sejam exibidos
+                                        'dateBaseUrl' => $this->baseUrl('minha-conta/agenda/data'), // Define a url base para os links das datas
+                                        'monthBaseUrl' => $this->baseUrl('minha-conta/agenda/data'), // Define a url base para os links de navegação dos meses
+                                        'cssClasses' => array(// Define uma classe css "feriado" para as datas no array
+                                            'feriado' => array_keys($this->agendamentos)
+                                        ),
+                                        // Dá um destaque maior inserindo o nome do feriado do carnaval
+                                        'inserts' => $this->agendamentos,
+                                        // Define que o html deve ser inserido dentro do link, após a data
+                                        'insertsPosition' => TCS_View_Helpers_Calendar::INSERT_APPEND
+                                    ))
+                                    ?>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </section>
+    </div>

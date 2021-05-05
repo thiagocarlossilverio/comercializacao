@@ -1,0 +1,181 @@
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section id="my-account-security-form" class="page container">
+            <form id="userSecurityForm" class="form-horizontal" action="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'negociar'), null, true); ?>" method="post">
+                <div class="container">
+                    <div class="row">
+                        <fieldset>
+                            <legend>Negociar com: <?= $this->dados_negociacao['nome_vendedor']; ?></legend>
+                            <br>
+                            <div class="span5">
+                                <input type="hidden" name="produto" value="<?= $this->dados_negociacao['produto']; ?>">
+                                <input type="hidden" name="vendedor" value="<?= $this->dados_negociacao['vendedor']; ?>">
+                                <input type="hidden" name="negociacao" value="<?= $this->negociacao; ?>">
+                                <div class="control-group ">
+                                    <label class="control-label">Quantidade Cabeças (*):</label>
+                                    <div class="controls">
+                                        <input name="quantidade" class="span3 toltip" title="Insira a quantidade de Suínos" value="<?= $this->dados_negociacao['quantidade']; ?>" min="60" type="number" required="true" >
+                                    </div>
+                                </div>
+
+                                <div class="control-group ">
+                                    <label class="control-label">Preço K.G (*):</label>
+                                    <div class="controls">
+                                        <input id="new-pass-control" name="preco" value="<?= $this->dados_negociacao['preco']; ?>" class="span3 preco toltip" title="Insira o preço por Kilo" type="text" required="true">
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label for="condicao" class="control-label">Condição Pagamento</label>
+                                    <div class="controls">
+                                        <select id="condicao" name="condicao_pagamento" class="span3 toltip" title="Insira a condição de pagamento">
+                                            <?
+                                            if ($this->condicoes) {
+                                                foreach ($this->condicoes as $condicao) {
+                                                    ?>
+                                                    <option value="<?= $condicao['id']; ?>" <?
+                                                    if ($this->dados_negociacao['condicao_pagamento'] == $condicao['id']) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>><?= $condicao['nome']; ?></option>
+                                                            <?
+                                                        }
+                                                    }
+                                                    ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label for="formas" class="control-label">Forma Pagamento</label>
+                                    <div class="controls">
+                                        <select id="formas" name="forma_pagamento" class="span3 toltip" title="Insira a forma de pagamento">
+                                            <?
+                                            if ($this->formas) {
+                                                foreach ($this->formas as $formas) {
+                                                    ?>
+                                                    <option value="<?= $formas['id']; ?>"<?
+                                                    if ($this->dados_negociacao['forma_pagamento'] == $formas['id']) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?> ><?= $formas['nome']; ?></option>
+                                                            <?
+                                                        }
+                                                    }
+                                                    ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Descrição Pagamento:</label>
+                                    <div class="controls">
+                                        <textarea name="descricao_pagamento" value="<?= $this->dados_negociacao['descricao_pagamento']; ?>" class="span3 toltip" title="Insira alguma informação complementar, referente ao metodo de pagamento!" rows="4" cols="100"><?= $this->dados_negociacao['descricao_pagamento']; ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  class="span5">
+
+                                <div class="control-group ">
+                                    <label for="tributacao" class="control-label">Tributação</label>
+                                    <div class="controls">
+                                        <select id="tributacao" name="tributacao" class="span3 toltip" title="Selecione o tipo de Tributação">
+                                            <option value="A negociar"<?
+                                            if ($this->dados_negociacao['tributacao'] == 'A negociar') {
+                                                echo 'selected';
+                                            }
+                                            ?>>A negociar</option>
+                                            <option value="Sem FUNRURAL/sem ICMS" <?
+                                            if ($this->dados_negociacao['tributacao'] == 'Sem FUNRURAL/sem ICMS') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Sem FUNRURAL/sem ICMS</option>
+                                            <option value="Sem FUNRURAL/com ICMS" <?
+                                            if ($this->dados_negociacao['tributacao'] == 'Sem FUNRURAL/com ICMS') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Sem FUNRURAL/com ICMS</option>
+                                            <option value="Com FUNRURAL/sem ICMS" <?
+                                            if ($this->dados_negociacao['tributacao'] == 'Com FUNRURAL/sem ICMS') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Com FUNRURAL/sem ICMS</option>
+                                            <option value="Com FUNRURAL/com ICMS" <?
+                                            if ($this->dados_negociacao['tributacao'] == 'Com FUNRURAL/com ICMS') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Com FUNRURAL/com ICMS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Descrição Tributária:</label>
+                                    <div class="controls">
+                                        <textarea name="descricao_tributaria" value="<?= $this->dados_negociacao['descricao_tributaria']; ?>" class="span3 toltip" title="Insira alguma informação complementar referente a tributação" rows="6" cols="100"><?= $this->dados_negociacao['descricao_tributaria']; ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  class="span5">
+
+                                <div class="control-group ">
+                                    <label class="control-label">Data Entrega (*):</label>
+                                    <div class="controls">
+                                        <input id="challenge-answer-control" name="data_entrega" class="span3 toltip" title="Insira a data de entrega da carga!" type="date" value="<?= $this->dados_negociacao['data_entrega']; ?>" required="true">
+                                    </div>
+                                </div>
+
+                                <div class="control-group ">
+                                    <label class="control-label">Horário Recebimento (*):</label>
+                                    <div class="controls">
+                                        <input  name="hora_inicial" class="span3 toltip" title="Insira o horario inicial de recebimento de suínos." type="time" value="<?= $this->dados_negociacao['hora_inicial']; ?>" required="true">
+                                    </div>
+                                </div>
+
+                                <div class="control-group ">
+                                    <label class="control-label">Horário Final (*):</label>
+                                    <div class="controls">
+                                        <input  name="hora_final" class="span3 toltip" title="Insira o horario final de recebimento de suínos." type="time" value="<?= $this->dados_negociacao['hora_final']; ?>" required="true">
+                                    </div>
+                                </div>
+
+                                <div class="control-group ">
+                                    <label for="endereco" class="control-label">Endereço Entrega (*):</label>
+                                    <div class="controls">
+                                        <select id="endereco" required="true" name="endereco" class="span3 toltip" title="Selecione o endereço do frigorífico, para a entrega">
+                                            <option>Selecione o Endereço</option>
+                                            <?
+                                            if ($this->enderecos) {
+                                                foreach ($this->enderecos as $endereco) {
+                                                    ?>
+                                                    <option value="<?= $endereco['id']; ?>" <?
+                                                    if ($this->dados_negociacao['endereco'] == $endereco['id']) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>><?= $endereco['rua']; ?> - <?= $endereco['cidade']; ?> - <?= $endereco['estado']; ?></option>
+                                                            <?
+                                                        }
+                                                    }
+                                                    ?>
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">Comentários:</label>
+                                    <div class="controls">
+                                        <textarea name="comentario" class="span3 toltip" title="Insira alguma informação complementar" value="<?= $this->dados_negociacao['comentario']; ?>" rows="4" cols="100"><?= $this->dados_negociacao['comentario']; ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <footer id="submit-actions" class="form-actions">
+                        <button id="submit-button" type="submit" class="btn btn-primary toltip" title="Enviar Contraproposta" name="action">Enviar</button>
+                        <a href="javascript:history.back()">
+                            <button type="button" class="btn toltip" title="Voltar para a pagina anterior" name="action" value="CANCEL">Cancelar</button>
+                        </a>
+                    </footer>
+                </div>
+            </form>
+        </section>
+    </div>

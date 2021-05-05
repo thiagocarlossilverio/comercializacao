@@ -1,0 +1,94 @@
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section class="page container">
+            <div class="row">
+                <div class="span16">
+                    <div id="Person-1" class="box">
+                        <div class="box-header">
+                            <i class="icon-user icon-large"></i>
+                            <h5>DADOS DA PROPOSTA</h5>
+                        </div>
+                        <div class="box-content box-table">
+                            <table class="table table-hover tablesorter">
+                                <tbody>
+                                    <tr>
+                                        <td width="173" ><strong>Produto:</strong></td>
+                                        <td width="179"><?= $this->dados_produto['nome']; ?> - <?= $this->dados_produto['nome_categoria']; ?></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>Quantidade:</strong></td>
+                                        <td><?= $this->dados['quantidade']; ?> Cabeças</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>Preço K.G:</strong></td>
+                                        <td>R$ <?= $this->dados['preco']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Condição Pagamento:</strong></td>
+                                        <td><?= $this->dados_condicao['nome']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Forma Pagamento:</strong></td>
+                                        <td><?= $this->dados_forma['nome']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descrição Pagamento:</strong></td>
+                                        <td><?= $this->dados['descricao_pagamento']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tributação:</strong></td>
+                                        <td><?= $this->dados['tributacao']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descrição Tributaria:</strong></td>
+                                        <td><?= $this->dados['descricao_tributaria']; ?></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>Endereço Entrega:</strong></td>
+                                        <td><?= $this->dados_endereco ['rua']; ?> - <?= $this->dados_endereco ['numero']; ?> - <?= $this->dados_endereco ['bairro']; ?> - <?= $this->dados_endereco ['cidade']; ?> - <?= $this->dados_endereco ['estado']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Data Entrega:</strong></td>
+                                        <td><?= $this->ConvercaoDate('-', $this->dados['data_entrega'], 2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Horário Inicial Recebimento:</strong></td>
+                                        <td><?= $this->dados['hora_inicial'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Horário Final Recebimento:</strong></td>
+                                        <td><?= $this->dados['hora_final']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Comentario:</strong></td>
+                                        <td><?= $this->dados['comentario']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vendedor:</strong></td>
+                                        <td><?= $this->dados_vendedor['nome']; ?></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'confirmacao', 'confirmar' => true), null, true); ?>">
+                        <button type="submit" class="btn btn-lg btn-success toltip" title="Confirmar Proposta">Confirmar</button>
+                    </a>
+
+                    <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'cancelar-confirmacao'), null, true); ?>">
+                        <button type="submit" class="btn btn-lg btn-danger toltip" title="Voltar para a pagina anterior">Cancelar</button>
+                    </a>
+                    <p>&nbsp;</p>
+                    <p></p>
+                </div>
+            </div>
+    </div>

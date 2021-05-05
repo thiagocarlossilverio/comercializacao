@@ -1,0 +1,50 @@
+<div id="body-container">
+    <div id="body-content">
+        <?= $this->action('menu-cliente', 'geral', 'default'); ?>
+        <section id="my-account-security-form" class="page container">
+            <form id="userSecurityForm" class="form-horizontal" action="<?php echo $this->url(array('module' => 'default', 'controller' => 'minha-conta', 'action' => 'contato'), null, true); ?>" method="post">
+                <div class="container">
+
+                    <div class="row">
+
+                        <div id="acct-verify-row" class="span16">
+                            <fieldset>
+                                <legend>Deixe um Recado</legend>
+                                <div class="control-group">
+                                    <label for="challengeQuestion" class="control-label">Vendedor</label>
+                                    <div class="controls">
+                                        <select id="challenge_question_control" name="vendedor" class="span7" required="true">
+                                            <option value="">Selecione o Vendedor</option>
+                                            <? foreach ($this->vendedores as $vendedor) { ?>
+                                                <option value="<?= $vendedor['id']; ?>"><?= $vendedor['nome']; ?></option>
+                                            <? } ?>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label class="control-label">Assunto</label>
+                                    <div class="controls">
+                                        <input id="challenge-answer-control" name="assunto" class="span7" type="text" required="true">
+
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Mensagem:</label>
+                                    <div class="controls">
+                                        <textarea name="mensagem" class="span7" rows="8" cols="100" required="true"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <footer id="submit-actions" class="form-actions">
+                        <button id="submit-button" type="submit" class="btn btn-primary toltip" title="Enviar Mensagem" name="action" value="CONFIRM">Enviar</button>
+                        <a href="javascript:history.back()">
+                            <button type="button" class="btn toltip" title="Voltar para pagina anterior" name="action" value="CANCEL">Cancelar</button>
+                        </a>
+                    </footer>
+                </div>
+            </form>
+        </section>
+    </div>
